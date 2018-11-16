@@ -1,5 +1,5 @@
 import re as regex
-import constant as const
+import patterns as const
 import sys
 
 class Reader():

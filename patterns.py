@@ -3,11 +3,9 @@ Q_LINE = r'^\s*{((?:q\d+,?\s?)*)},\n$'
 E_LINE = r'^\s*{((?:\w+(?:, )?)+)},\n$'
 r_LINE = r'^\s*{((?:\w+(?:,)?)+)},\n$'
 FIRST_S_LINE = r'^\s*\{\n$'
-S_LINE = r'^\s*\((q\d+), (\w+)\) \-\> \((q\d+), (\w+), ([R|L])\)(,?)\n$'
 LAST_S_LINE = r'^\s*\}\n$'
 q0_LINE = r'^\s*{(q\d+)}\n$'
 LAST_LINE = r'^\)\n$'
-INPUT_LINE = r'^$'
 
 # Cria o padrao em regex considerando os estados e o anfabeto da fita
 def create_S_pattern(Q, r):
