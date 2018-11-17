@@ -9,6 +9,12 @@ class Tm():
     def compute(self):
         pass        
 
+    def moveLeft(self):
+        pass
+
+    def moveRight(self):
+        pass
+
     def __str__(self):
         return self.tape
 
