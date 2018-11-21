@@ -9,13 +9,17 @@ class Tm():
        self.position = 0
        self.refresh_tape() 
 
+    def __str__(self):
+        return self.tape
+
     def refresh_tape(self):
-        self.tape = self.input[:self.position] + "{" + self.actual + "}" + self.input[self.position:len(self.input)]
+        self.tape = "".join([self.input[:self.position], "{", self.actual, "}", self.input[self.position:len(self.input)]])
 
     def compute(self):
+        # Lendo o próximo simbolo, vai para algum lugar?    
         pass        
 
-    def moveLeft(self):
+    def move_left(self):
         try: 
             self.position -= 1
             if self.position < 0:
@@ -25,14 +29,14 @@ class Tm():
             print('Erro encontrado: ' + repr(error)) 
             sys.exit(1)
 
-    def moveRight(self):
+    def move_right(self):
         self.position += 1
         self.refresh_tape() 
 
-    def __str__(self):
-        return self.tape
+    def get_next(self):
+        return tape[tape.find('}')+1]
 
 tm = Tm("entrada.txt")
-tm.moveRight()
-tm.moveLeft()
-print (tm)
+tm.move_right()
+tm.move_left()
+print (tm.S)
