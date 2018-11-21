@@ -13,51 +13,54 @@ class Tm():
                    self.transitions[state][trans[1]] = trans[2:len(trans)-1]
        self.actual = self.q0
        self.position = 0
-       self.refresh_tape() 
 
-    def __str__(self):
-        return self.tape
-
+    # Funcao que printa o estado atual e a cabeca de leitura na fita
     def refresh_tape(self):
-        self.tape = "".join([self.input[:self.position], "{", self.actual, "}", self.input[self.position:len(self.input)]])
+        print(self.input[:self.position] + "{" + self.actual + "}" + self.input[self.position:])
 
+    # Funcao que executa a maquina de turing, movendo a cabeca de leitura 
     def compute(self):
-        # Lendo o próximo simbolo, vai para algum lugar?    
+        # Lendo o próximo simbolo, vai para algum lugar?
+        self.refresh_tape()   
         transition = self.get_transition()   
-        self.write_next(transition[1])
+        self.write_actual(transition[1])
         self.actual = transition[0]
         if transition[2] == 'R':
             self.move_right()
         else:
             self.move_left()
 
+    # Funcao que pega a transicao que o estado atual ira realizar
     def get_transition(self):
-        return self.transitions[self.actual][self.get_next()]
+        return self.transitions[self.actual][self.read_actual()]
 
+    # Funcao que move a cabeca de leitura para esquerda
     def move_left(self):
         try: 
             self.position -= 1
             if self.position < 0:
                 raise Exception("Movimento inválido!")
-            self.refresh_tape() 
         except Exception as error:
             print('Erro encontrado: ' + repr(error)) 
             sys.exit(1)
 
-    def write_next(self, value):
-        tape_list = list(self.tape)
-        tape_list[self.tape.find('}')+1] = value
-        self.tape = "".join(tape_list)
-
+    # Funcao que move a cabeca de leitura para direita
     def move_right(self):
         self.position += 1
-        self.refresh_tape() 
 
-    def get_next(self):
-        return self.tape[self.tape.find('}')+1]
+    # Funcao que faz a escrita no local aonde esta a cabeca de leitura
+    def write_actual(self, value):
+        input_list = list(self.input)
+        input_list[self.position] = value
+        self.input = "".join(input_list)
+
+    # Funcao que faz a leitura no local aonde esta a cabeca de leitura
+    def read_actual(self):
+        return self.input[self.position]
 
 tm = Tm("entrada.txt")
 while True:
-    print(tm)
-    print("position ", tm.position)
-    tm.compute()
+    try:
+        tm.compute()
+    except KeyError:
+        break
