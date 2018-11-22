@@ -61,11 +61,3 @@ class Tm():
     # Funcao que faz a leitura no local aonde esta a cabeca de leitura
     def read_actual(self):
         return self.input[self.position]
-
-# TODO: receber arquivo como argumento
-tm = Tm("entrada.txt")
-while True:
-    try:
-        tm.compute()
-    except KeyError:
-        break
