@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tm &#8212; Documentação turing-machine 1.0.0</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Pesquisar" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice Geral"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos do Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentação turing-machine 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Código do módulo</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Código fonte de tm</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">NoReturn</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">reader</span> <span class="k">import</span> <span class="n">Reader</span>
+
+<div class="viewcode-block" id="Tm"><a class="viewcode-back" href="../tm.html#tm.Tm">[documentos]</a><span class="k">class</span> <span class="nc">Tm</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Classe que representa uma maquina de turing deterministica.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param filename: Nome do arquivo de entrada.</span>
+<span class="sd">        :type filename: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_file</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_transitions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+        
+<div class="viewcode-block" id="Tm.make_transitions"><a class="viewcode-back" href="../tm.html#tm.Tm.make_transitions">[documentos]</a>    <span class="k">def</span> <span class="nf">make_transitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que cria dicionario de dicionarios para armazenamento das transições de cada estado.</span>
+
+<span class="sd">        A estrutura é dada no seguinte formato abaixo: </span>
+<span class="sd">        </span>
+<span class="sd">        - { `&#39;estado_1&#39;`: {`&#39;simbolo_leitura_1&#39;`: (&#39;proximo_estado&#39;, &#39;simbolo_escrita&#39;, &#39;direcao&#39;), ...}, ...}</span>
+<span class="sd">        </span>
+<span class="sd">        - {&#39;q0&#39;: {&#39;B&#39;: (&#39;q1&#39;, &#39;1&#39;, &#39;R&#39;), ...}, &#39;q1&#39;: {&#39;1&#39;, ...}, ... &#39;qn&#39;: { ...}} </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Q</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">source</span><span class="p">,</span> <span class="n">in_symbol</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">out_symbol</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="n">state</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">in_symbol</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">destination</span><span class="p">,</span> <span class="n">out_symbol</span><span class="p">,</span> <span class="n">direction</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Tm.show_tape"><a class="viewcode-back" href="../tm.html#tm.Tm.show_tape">[documentos]</a>    <span class="k">def</span> <span class="nf">show_tape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que imprime o estado atual e a configuracao da fita.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">],</span> <span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actual</span><span class="p">,</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">:]]))</span></div>
+
+<div class="viewcode-block" id="Tm.compute"><a class="viewcode-back" href="../tm.html#tm.Tm.compute">[documentos]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que executa realiza uma computacao na maquina de turing,</span>
+<span class="sd">            alterando -*ou nao*- o estado atual, escrevendo um simbolo e movendo</span>
+<span class="sd">            a cabeca de leitura.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_tape</span><span class="p">()</span>   
+        <span class="n">destination</span><span class="p">,</span> <span class="n">out_symbol</span><span class="p">,</span> <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_transition</span><span class="p">()</span>   
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_actual</span><span class="p">(</span><span class="n">out_symbol</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actual</span> <span class="o">=</span> <span class="n">destination</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;R&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">move_right</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">move_left</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Tm.get_transition"><a class="viewcode-back" href="../tm.html#tm.Tm.get_transition">[documentos]</a>    <span class="k">def</span> <span class="nf">get_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que retorna a transicao que o estado atual ira realizar.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">actual</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">read_actual</span><span class="p">()]</span></div>
+
+<div class="viewcode-block" id="Tm.move_left"><a class="viewcode-back" href="../tm.html#tm.Tm.move_left">[documentos]</a>    <span class="k">def</span> <span class="nf">move_left</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que move a cabeca de leitura para esquerda.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Movimento inválido!&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Erro encontrado: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Tm.move_right"><a class="viewcode-back" href="../tm.html#tm.Tm.move_right">[documentos]</a>    <span class="k">def</span> <span class="nf">move_right</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que move a cabeca de leitura para direita.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Tm.write_actual"><a class="viewcode-back" href="../tm.html#tm.Tm.write_actual">[documentos]</a>    <span class="k">def</span> <span class="nf">write_actual</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que realiza a escrita na posicao onde a cabeca de leitura se encontra.</span>
+<span class="sd">       </span>
+<span class="sd">        :param value: Valor a ser escrito na posição atual</span>
+<span class="sd">        :type value: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">)</span>
+        <span class="n">input_list</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Tm.read_actual"><a class="viewcode-back" href="../tm.html#tm.Tm.read_actual">[documentos]</a>    <span class="k">def</span> <span class="nf">read_actual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Metodo que faz a leitura no local aonde esta a cabeca de leitura.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Pesquisa rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Ir" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegação</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice Geral"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos do Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Documentação turing-machine 1.0.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Código do módulo</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Gabriel Melo &amp; Bruno Queiroz.
+      Criado utilizando <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+#scripts
+Doidera
+
+.. toctree::
+   :maxdepth: 4
+
+   main
+   patterns
+   reader
+   tm
