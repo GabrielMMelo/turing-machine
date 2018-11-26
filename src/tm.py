@@ -1,11 +1,10 @@
 import sys
-from typing import List
 from .reader import Reader
 
 class Tm():
-    """Classe que representa uma maquina de turing deterministica."""
+    """Classe que representa uma máquina de turing determinística."""
 
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename):
         """
         :param filename: Nome do arquivo de entrada.
         :type filename: str
@@ -18,7 +17,7 @@ class Tm():
         self.position = 0
         
     def make_transitions(self):
-        """Metodo que cria dicionario de dicionarios para armazenamento das transições de cada estado.
+        """Método que cria dicionário de dicionários para armazenamento das transições de cada estado.
 
         A estrutura é dada no seguinte formato abaixo: 
         
@@ -33,15 +32,15 @@ class Tm():
                 if source == state:
                     self.transitions[state][in_symbol] = [destination, out_symbol, direction]
 
-    def show_tape(self) -> None:
-        """Metodo que imprime o estado atual e a configuracao da fita."""
+    def show_tape(self):
+        """Método que imprime o estado atual e a configuração da fita."""
         print("".join([self.tape[:self.position], "{", self.actual, "}", \
                 self.tape[self.position:]]))
 
-    def compute(self) -> None:
-        """Metodo que executa realiza uma computacao na maquina de turing,
-            alterando -*ou nao*- o estado atual, escrevendo um simbolo e movendo
-            a cabeca de leitura.
+    def compute(self):
+        """Método que executa uma computacao na máquina de turing,
+            alterando -*ou não*- o estado atual, escrevendo um símbolo e movendo
+            a cabeça de leitura para esquerda ou direita.
         """
         self.show_tape()   
         destination, out_symbol, direction = self.get_transition()   
@@ -52,12 +51,22 @@ class Tm():
         else:
             self.move_left()
 
-    def get_transition(self) -> List[str]:
-        """Metodo que retorna a transicao que o estado atual ira realizar."""
+    def get_transition(self):
+        """Método que retorna a transição que o estado atual irá realizar lendo o símbolo atual.
+        
+        :return: (*List*) Lista de ``str`` contendo uma transição no formato lista['``qi``', '``ri``', '``D``'], onde:
+
+        - ``qi``: Estado destino;
+
+        - ``ri``: Símbolo a ser escrito;
+
+        - ``D``: Direção a mover a cabeça de leitura (*L* ou *R*)
+        """
+
         return self.transitions[self.actual][self.read_actual()]
 
-    def move_left(self) -> None:
-        """Metodo que move a cabeca de leitura para esquerda."""
+    def move_left(self):
+        """Método que move a cabeça de leitura para esquerda."""
         try: 
             self.position -= 1
             if self.position == -1:
@@ -65,14 +74,14 @@ class Tm():
         except Exception as error:
             sys.exit('Erro encontrado: ' + str(error))
 
-    def move_right(self) -> None:
-        """Metodo que move a cabeca de leitura para direita."""
+    def move_right(self):
+        """Método que move a cabeça de leitura para direita."""
         self.position += 1
         if self.position == len(self.tape):
             self.tape = "".join([self.tape, 'B'])
 
-    def write_actual(self, value: str) -> None:
-        """Metodo que realiza a escrita na posicao onde a cabeca de leitura se encontra.
+    def write_actual(self, value):
+        """Método que realiza a escrita na posição onde a cabeça de leitura se encontra.
        
         :param value: Valor a ser escrito na posição atual
         :type value: str
@@ -81,6 +90,10 @@ class Tm():
         input_list[self.position] = value
         self.tape = "".join(input_list)
 
-    def read_actual(self) -> str:
-        """Metodo que faz a leitura no local aonde esta a cabeca de leitura."""
+    def read_actual(self):
+        """Método que retorna o símbolo da posição onde está a cabeça de leitura.
+        
+        :return: (*str*) Símbolo da fita na posição que a cabeça de leitura se encontra.
+        """
+
         return self.tape[self.position]

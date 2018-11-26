@@ -1,12 +1,11 @@
 import sys
 import re as regex
-from typing import Tuple, List
 from .patterns import * 
 
 class Reader():
     """Classe para leitura e validacao do arquivo de entrada."""
 
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename):
         """
         :param filename: Nome do arquivo de entrada.
         :type filename: str
@@ -14,7 +13,7 @@ class Reader():
         self.file = filename
         self.line_counter = 0
 
-    def read_file(self) -> Tuple[List[str], List[List[str]], str, str]:
+    def read_file(self):
         """Valida, linha por linha, o arquivo de entrada e retorna as estruturas que compoem 
             a maquina de turing mais a entrada.
         """
@@ -39,7 +38,7 @@ class Reader():
             
         return Q, S, q0[0], input[0]
 
-    def readline(self, file) -> str:
+    def readline(self, file):
         """*'Sobrescrita'* do metodo de ler linhas para incrementar o contador e auxiliar
             na legibilidade da mensagem de erro.
 
@@ -50,7 +49,7 @@ class Reader():
         self.line_counter += 1
         return file.readline()
     
-    def remove_blank(self, line: str) -> str:
+    def remove_blank(self, line):
         """Remove espacos em branco e gera uma lista com dos valores separados por virgula.
        
         :param line: Linha do arquivo de entrada
@@ -59,7 +58,7 @@ class Reader():
 
         return line[0].replace(' ','').split(',')
 
-    def check_line(self, line: str, expected: str) -> str:
+    def check_line(self, line, expected):
         """Valida linha do arquivo de entrada reconhecendo padroes em regex, montados no modulo 
         ``patterns``
 
