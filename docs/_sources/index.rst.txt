@@ -22,7 +22,7 @@ Para executar o módulo basta clonar o respositório::
 
     git clone https://github.com/GabrielMMelo/turing-machine
 
-E execute o arquivo `main.py`, passando o arquivo de entrada como parâmetro::
+E executar o arquivo `main.py`, passando o arquivo de entrada como parâmetro::
 
     python main.py <arquivo-de-entrada>
 

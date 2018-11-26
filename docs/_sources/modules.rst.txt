@@ -1,6 +1,8 @@
 módulos
 =======
 
+O projeto é dividido em três módulos: o ``patterns`` onde montamos, dinamicamente, os padrões para verificação do arquivo de entrada; o ``reader`` para leitura, validação e sumarização do conteúdo extraído do arquivo de entrada e o ``tm``, onde é implementada a máquina de Turing para computação de funções numéricas.
+
 .. toctree::
    :maxdepth: 4
 
