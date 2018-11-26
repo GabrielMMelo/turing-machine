@@ -1,4 +1,4 @@
-reader module
+Módulo reader
 =============
 
 .. automodule:: reader

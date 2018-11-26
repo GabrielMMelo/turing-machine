@@ -1,7 +1,7 @@
 import sys
 import re as regex
 from typing import Tuple, List
-import patterns as const
+from .patterns import * 
 
 class Reader():
     """Classe para leitura e validacao do arquivo de entrada."""
@@ -20,22 +20,22 @@ class Reader():
         """
 
         with open(self.file) as file:
-            self.check_line(self.readline(file), const.FIRST_LINE)
-            Q = self.remove_blank(self.check_line(self.readline(file), const.Q_LINE))
-            E = self.remove_blank(self.check_line(self.readline(file), const.E_LINE))
-            r = self.remove_blank(self.check_line(self.readline(file), const.r_LINE))
-            self.check_line(self.readline(file), const.FIRST_S_LINE)
+            self.check_line(self.readline(file), FIRST_LINE)
+            Q = self.remove_blank(self.check_line(self.readline(file), Q_LINE))
+            E = self.remove_blank(self.check_line(self.readline(file), E_LINE))
+            r = self.remove_blank(self.check_line(self.readline(file), r_LINE))
+            self.check_line(self.readline(file), FIRST_S_LINE)
             S = []
-            S_pattern = const.create_S_pattern(Q,r)
+            S_pattern = create_S_pattern(Q,r)
             while(True):
                 S.append(self.check_line(self.readline(file), S_pattern))
                 # Se nao for a ultima transicao do arquivo
                 if not ',' in S[-1][-1]:
                     break
-            self.check_line(self.readline(file), const.LAST_S_LINE)
-            q0 = self.check_line(self.readline(file), const.q0_LINE)
-            self.check_line(self.readline(file), const.LAST_LINE)
-            input = self.check_line(self.readline(file), const.create_input_pattern(r))
+            self.check_line(self.readline(file), LAST_S_LINE)
+            q0 = self.check_line(self.readline(file), q0_LINE)
+            self.check_line(self.readline(file), LAST_LINE)
+            input = self.check_line(self.readline(file), create_input_pattern(r))
             
         return Q, S, q0[0], input[0]
 
