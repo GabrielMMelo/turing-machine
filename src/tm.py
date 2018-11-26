@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn, List
+from typing import List
 from .reader import Reader
 
 class Tm():
@@ -33,12 +33,12 @@ class Tm():
                 if source == state:
                     self.transitions[state][in_symbol] = [destination, out_symbol, direction]
 
-    def show_tape(self) -> NoReturn:
+    def show_tape(self) -> None:
         """Metodo que imprime o estado atual e a configuracao da fita."""
         print("".join([self.tape[:self.position], "{", self.actual, "}", \
                 self.tape[self.position:]]))
 
-    def compute(self) -> NoReturn:
+    def compute(self) -> None:
         """Metodo que executa realiza uma computacao na maquina de turing,
             alterando -*ou nao*- o estado atual, escrevendo um simbolo e movendo
             a cabeca de leitura.
@@ -56,7 +56,7 @@ class Tm():
         """Metodo que retorna a transicao que o estado atual ira realizar."""
         return self.transitions[self.actual][self.read_actual()]
 
-    def move_left(self) -> NoReturn:
+    def move_left(self) -> None:
         """Metodo que move a cabeca de leitura para esquerda."""
         try: 
             self.position -= 1
@@ -65,13 +65,13 @@ class Tm():
         except Exception as error:
             sys.exit('Erro encontrado: ' + str(error))
 
-    def move_right(self) -> NoReturn:
+    def move_right(self) -> None:
         """Metodo que move a cabeca de leitura para direita."""
         self.position += 1
         if self.position == len(self.tape):
             self.tape = "".join([self.tape, 'B'])
 
-    def write_actual(self, value: str) -> NoReturn:
+    def write_actual(self, value: str) -> None:
         """Metodo que realiza a escrita na posicao onde a cabeca de leitura se encontra.
        
         :param value: Valor a ser escrito na posição atual
