@@ -8,8 +8,7 @@ q0_LINE = r'^\s*{(q\d+)}\n$'
 LAST_LINE = r'^\)\n$'
 
 def create_S_pattern(Q, r):
-    """Função que cria o padrão de transições em regex considerando os 
-        estados e o alfabeto da fita.
+    """Função que cria o padrão de transições em regex considerando os estados e o alfabeto da fita.
 
     :param Q: Lista dos nomes dos estados da maquina de Turing
     :type Q: List
@@ -24,8 +23,7 @@ def create_S_pattern(Q, r):
             '|'.join([i for i in Q]) + '), (' +'|'.join([str(i) for i in r]) + '), ([R|L])\)(,?)\n$'
 
 def create_input_pattern(r):
-    """Função que cria o padrão de entrada em regex considerando 
-        alfabeto da fita.
+    """Função que cria o padrão de entrada em regex considerando alfabeto da fita.
 
     :param r: Lista com o alfabeto da fita da máquina de Turing
     :type r: List

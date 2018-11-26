@@ -2,7 +2,7 @@ import sys
 from .reader import Reader
 
 class Tm():
-    """Classe que representa uma máquina de turing determinística."""
+    """Classe que representa uma máquina de Turing determinística para computação de funções numéricas."""
 
     def __init__(self, filename):
         """
@@ -20,9 +20,11 @@ class Tm():
         """Método que cria dicionário de dicionários para armazenamento das transições de cada estado.
 
         A estrutura é dada no seguinte formato abaixo: 
-        
-        - { `'estado_1'`: {`'simbolo_leitura_1'`: ('proximo_estado', 'simbolo_escrita', 'direcao'), ...}, ...}
-        
+       
+        - { ``estado_i``: { ``simbolo_leitura_j``: (``proximo_estado_k``, ``simbolo_escrita_k``, ``direcao_k``), ...}, ...}
+       
+        Por exemplo:
+
         - {'q0': {'B': ('q1', '1', 'R'), ...}, 'q1': {'1', ...}, ... 'qn': { ...}} 
         """
 
@@ -38,7 +40,7 @@ class Tm():
                 self.tape[self.position:]]))
 
     def compute(self):
-        """Método que executa uma computacao na máquina de turing,
+        """Método que executa uma computação na máquina de Turing,
             alterando -*ou não*- o estado atual, escrevendo um símbolo e movendo
             a cabeça de leitura para esquerda ou direita.
         """

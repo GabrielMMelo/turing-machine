@@ -3,7 +3,7 @@ import re as regex
 from .patterns import * 
 
 class Reader():
-    """Classe para leitura e validacao do arquivo de entrada."""
+    """Classe para leitura e validação do arquivo de entrada."""
 
     def __init__(self, filename):
         """
@@ -14,8 +14,8 @@ class Reader():
         self.line_counter = 0
 
     def read_file(self):
-        """Valida, linha por linha, o arquivo de entrada e retorna as estruturas que compoem 
-            a maquina de turing mais a entrada.
+        """Valida, linha por linha, o arquivo de entrada e retorna as estruturas que compõem 
+            a máquina de Turing mais a entrada.
         """
 
         with open(self.file) as file:
@@ -39,9 +39,8 @@ class Reader():
         return Q, S, q0[0], input[0]
 
     def readline(self, file):
-        """*'Sobrescrita'* do metodo de ler linhas para incrementar o contador e auxiliar
-            na legibilidade da mensagem de erro.
-
+        """*'Sobrescrita'* do metodo de ler linhas para incrementar o contador e auxiliar na legibilidade da mensagem de erro.
+            
         :param file: Objeto ``file`` do arquivo de entrada
         :type file: file
         """
@@ -50,7 +49,7 @@ class Reader():
         return file.readline()
     
     def remove_blank(self, line):
-        """Remove espacos em branco e gera uma lista com dos valores separados por virgula.
+        """Remove espaços em branco e gera uma lista com dos valores separados por vírgula.
        
         :param line: Linha do arquivo de entrada
         :type line: str
@@ -59,8 +58,7 @@ class Reader():
         return line[0].replace(' ','').split(',')
 
     def check_line(self, line, expected):
-        """Valida linha do arquivo de entrada reconhecendo padroes em regex, montados no modulo 
-        ``patterns``
+        """Valida linha do arquivo de entrada reconhecendo padrões em regex, montados no módulo ``patterns``
 
         :param line: Linha do arquivo de entrada
         :type line: str

@@ -1,111 +1,244 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Módulo tm (turing machine) &#8212; Documentação turing-machine 1.0.0</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="pt" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tm (turing-machine) &mdash; Documentação turing-machine </title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
-    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Pesquisar" href="search.html" />
-    <link rel="prev" title="Módulo reader" href="reader.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navegação</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="Índice Geral"
-             accesskey="I">índice</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Índice de Módulos do Python"
-             >módulos</a> |</li>
-        <li class="right" >
-          <a href="reader.html" title="Módulo reader"
-             accesskey="P">anterior</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Documentação turing-machine 1.0.0</a> &#187;</li> 
-      </ul>
-    </div>  
+    <link rel="prev" title="reader" href="reader.html" /> 
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> turing-machine
+          
+
+          
+          </a>
+
+          
             
-  <div class="section" id="modulo-tm-turing-machine">
-<h1>Módulo tm (<em>turing machine</em>)<a class="headerlink" href="#modulo-tm-turing-machine" title="Link permanente para este título">¶</a></h1>
-<span class="target" id="module-tm"></span><dl class="class">
-<dt id="tm.Tm">
-<em class="property">class </em><code class="descclassname">tm.</code><code class="descname">Tm</code><span class="sig-paren">(</span><em>filename: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tm.html#Tm"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Classe que representa uma maquina de turing deterministica.</p>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">módulos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="patterns.html">patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reader.html">reader</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tm (turing-machine)</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">turing-machine</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">módulos</a> &raquo;</li>
+        
+      <li>tm (turing-machine)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-src.tm">
+<span id="tm-turing-machine"></span><h1>tm (turing-machine)<a class="headerlink" href="#module-src.tm" title="Link permanente para este título">¶</a></h1>
+<dl class="class">
+<dt id="src.tm.Tm">
+<em class="property">class </em><code class="descclassname">src.tm.</code><code class="descname">Tm</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(em Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Classe que representa uma máquina de Turing determinística para computação de funções numéricas.</p>
 <dl class="method">
-<dt id="tm.Tm.compute">
-<code class="descname">compute</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="reference internal" href="_modules/tm.html#Tm.compute"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.compute" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que executa realiza uma computacao na maquina de turing,
-alterando -<em>ou nao</em>- o estado atual, escrevendo um simbolo e movendo
-a cabeca de leitura.</p>
+<dt id="src.tm.Tm.compute">
+<code class="descname">compute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.compute"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.compute" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que executa uma computação na máquina de Turing,
+alterando -<em>ou não</em>- o estado atual, escrevendo um símbolo e movendo
+a cabeça de leitura para esquerda ou direita.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="tm.Tm.get_transition">
-<code class="descname">get_transition</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="_modules/tm.html#Tm.get_transition"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.get_transition" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que retorna a transicao que o estado atual ira realizar.</p>
+<dt id="src.tm.Tm.get_transition">
+<code class="descname">get_transition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.get_transition"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.get_transition" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que retorna a transição que o estado atual irá realizar lendo o símbolo atual.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">(<em>List</em>) Lista de <code class="docutils literal notranslate"><span class="pre">str</span></code> contendo uma transição no formato lista[“<code class="docutils literal notranslate"><span class="pre">qi</span></code>”, “<code class="docutils literal notranslate"><span class="pre">ri</span></code>”, “<code class="docutils literal notranslate"><span class="pre">D</span></code>”], onde:</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">qi</span></code>: Estado destino;</li>
+<li><code class="docutils literal notranslate"><span class="pre">ri</span></code>: Símbolo a ser escrito;</li>
+<li><code class="docutils literal notranslate"><span class="pre">D</span></code>: Direção a mover a cabeça de leitura (<em>L</em> ou <em>R</em>)</li>
+</ul>
 </dd></dl>
 
 <dl class="method">
-<dt id="tm.Tm.make_transitions">
-<code class="descname">make_transitions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tm.html#Tm.make_transitions"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.make_transitions" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que cria dicionario de dicionarios para armazenamento das transições de cada estado.</p>
+<dt id="src.tm.Tm.make_transitions">
+<code class="descname">make_transitions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.make_transitions"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.make_transitions" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que cria dicionário de dicionários para armazenamento das transições de cada estado.</p>
 <p>A estrutura é dada no seguinte formato abaixo:</p>
 <ul class="simple">
-<li>{ <cite>“estado_1”</cite>: {<cite>“simbolo_leitura_1”</cite>: (“proximo_estado”, “simbolo_escrita”, “direcao”), …}, …}</li>
+<li>{ <code class="docutils literal notranslate"><span class="pre">estado_i</span></code>: { <code class="docutils literal notranslate"><span class="pre">simbolo_leitura_j</span></code>: (<code class="docutils literal notranslate"><span class="pre">proximo_estado_k</span></code>, <code class="docutils literal notranslate"><span class="pre">simbolo_escrita_k</span></code>, <code class="docutils literal notranslate"><span class="pre">direcao_k</span></code>), …}, …}</li>
+</ul>
+<p>Por exemplo:</p>
+<ul class="simple">
 <li>{“q0”: {“B”: (“q1”, “1”, “R”), …}, “q1”: {“1”, …}, … “qn”: { …}}</li>
 </ul>
 </dd></dl>
 
 <dl class="method">
-<dt id="tm.Tm.move_left">
-<code class="descname">move_left</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="reference internal" href="_modules/tm.html#Tm.move_left"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.move_left" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que move a cabeca de leitura para esquerda.</p>
+<dt id="src.tm.Tm.move_left">
+<code class="descname">move_left</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.move_left"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.move_left" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que move a cabeça de leitura para esquerda.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="tm.Tm.move_right">
-<code class="descname">move_right</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="reference internal" href="_modules/tm.html#Tm.move_right"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.move_right" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que move a cabeca de leitura para direita.</p>
+<dt id="src.tm.Tm.move_right">
+<code class="descname">move_right</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.move_right"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.move_right" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que move a cabeça de leitura para direita.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="tm.Tm.read_actual">
-<code class="descname">read_actual</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/tm.html#Tm.read_actual"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.read_actual" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que faz a leitura no local aonde esta a cabeca de leitura.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tm.Tm.show_tape">
-<code class="descname">show_tape</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; NoReturn<a class="reference internal" href="_modules/tm.html#Tm.show_tape"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.show_tape" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que imprime o estado atual e a configuracao da fita.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tm.Tm.write_actual">
-<code class="descname">write_actual</code><span class="sig-paren">(</span><em>value: str</em><span class="sig-paren">)</span> &#x2192; NoReturn<a class="reference internal" href="_modules/tm.html#Tm.write_actual"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#tm.Tm.write_actual" title="Link permanente para esta definição">¶</a></dt>
-<dd><p>Metodo que realiza a escrita na posicao onde a cabeca de leitura se encontra.</p>
+<dt id="src.tm.Tm.read_actual">
+<code class="descname">read_actual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.read_actual"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.read_actual" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que retorna o símbolo da posição onde está a cabeça de leitura.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>value</strong> (<em>str</em>) – Valor a ser escrito na posição atual</td>
+<tr class="field-odd field"><th class="field-name">Retorno:</th><td class="field-body">(<em>str</em>) Símbolo da fita na posição que a cabeça de leitura se encontra.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.tm.Tm.show_tape">
+<code class="descname">show_tape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.show_tape"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.show_tape" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que imprime o estado atual e a configuração da fita.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.tm.Tm.write_actual">
+<code class="descname">write_actual</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/tm.html#Tm.write_actual"><span class="viewcode-link">[código fonte]</span></a><a class="headerlink" href="#src.tm.Tm.write_actual" title="Link permanente para esta definição">¶</a></dt>
+<dd><p>Método que realiza a escrita na posição onde a cabeça de leitura se encontra.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parâmetros:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(em Python v3.7)"><em>str</em></a>) – Valor a ser escrito na posição atual</td>
 </tr>
 </tbody>
 </table>
@@ -116,55 +249,60 @@ a cabeca de leitura.</p>
 </div>
 
 
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="reader.html" class="btn btn-neutral" title="reader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Melo &amp; Bruno Queiroz
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Tópico anterior</h4>
-  <p class="topless"><a href="reader.html"
-                        title="capítulo anterior">Módulo reader</a></p>
-  <div role="note" aria-label="source link">
-    <h3>Esta Página</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/tm.rst.txt"
-            rel="nofollow">Exibir Fonte</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Pesquisa rápida</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Ir" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navegação</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="Índice Geral"
-             >índice</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Índice de Módulos do Python"
-             >módulos</a> |</li>
-        <li class="right" >
-          <a href="reader.html" title="Módulo reader"
-             >anterior</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Documentação turing-machine 1.0.0</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2018, Gabriel Melo &amp; Bruno Queiroz.
-      Criado utilizando <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

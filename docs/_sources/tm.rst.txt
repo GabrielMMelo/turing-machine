@@ -1,7 +1,7 @@
-Módulo tm (*turing machine*)
-=========
+tm (turing-machine)
+===================
 
-.. automodule:: tm
+.. automodule:: src.tm
     :members:
     :undoc-members:
     :show-inheritance:
