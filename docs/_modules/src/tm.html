@@ -141,7 +141,10 @@
            <div itemprop="articleBody">
             
   <h1>Código fonte de src.tm</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">.reader</span> <span class="k">import</span> <span class="n">Reader</span>
 
 <div class="viewcode-block" id="Tm"><a class="viewcode-back" href="../../tm.html#src.tm.Tm">[documentos]</a><span class="k">class</span> <span class="nc">Tm</span><span class="p">():</span>
@@ -210,8 +213,14 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transitions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">actual</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">read_actual</span><span class="p">()]</span></div>
 
+<div class="viewcode-block" id="Tm.clean_right"><a class="viewcode-back" href="../../tm.html#src.tm.Tm.clean_right">[documentos]</a>    <span class="k">def</span> <span class="nf">clean_right</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Método que remove símbolo branco (*&#39;B&#39;*) excedente à direita da fita da máquina de Turing.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="Tm.move_left"><a class="viewcode-back" href="../../tm.html#src.tm.Tm.move_left">[documentos]</a>    <span class="k">def</span> <span class="nf">move_left</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Método que move a cabeça de leitura para esquerda.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clean_right</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span> 
             <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">-=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
@@ -233,7 +242,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">input_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">)</span>
         <span class="n">input_list</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+        
+        <span class="c1"># Caso da escrita na &quot;última&quot; posição da fita com símbolo diferente de &#39;B&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tape</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Tm.read_actual"><a class="viewcode-back" href="../../tm.html#src.tm.Tm.read_actual">[documentos]</a>    <span class="k">def</span> <span class="nf">read_actual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Método que retorna o símbolo da posição onde está a cabeça de leitura.</span>

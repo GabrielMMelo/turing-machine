@@ -29,7 +29,7 @@ E execute o arquivo `main.py`, passando o arquivo de entrada como parâmetro::
 Leitura e validação do arquivo de entrada
 -----------------------------------------
 
-O módulo :module: reader ``reader`` é o responsável por ler, validar e sumarizar o conteúdo do arquivo de entrada fornecida como argumento na execução do programa.
+O módulo ``reader`` é o responsável por ler, validar e sumarizar o conteúdo do arquivo de entrada fornecida como argumento na execução do programa.
 
 Cada tipo de dado do arquivo de entrada é verificada utilizando padrões em regexp implementados no módulo ``patterns``.
 

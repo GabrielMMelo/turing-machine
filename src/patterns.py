@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 FIRST_LINE = r'^\(\n$'
 Q_LINE = r'^\s*{((?:q\d+,?\s?)*)},\n$'
 E_LINE = r'^\s*{((?:\w+(?:, )?)+)},\n$'

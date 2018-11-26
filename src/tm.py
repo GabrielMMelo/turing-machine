@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 from .reader import Reader
 
@@ -67,8 +70,14 @@ class Tm():
 
         return self.transitions[self.actual][self.read_actual()]
 
+    def clean_right(self):
+        """Método que remove símbolo branco (*'B'*) excedente à direita da fita da máquina de Turing."""
+        if self.tape[-1] == 'B' and self.tape[-2] == 'B':
+            self.tape = self.tape[:len(self.tape)-1]
+
     def move_left(self):
         """Método que move a cabeça de leitura para esquerda."""
+        self.clean_right()
         try: 
             self.position -= 1
             if self.position == -1:
@@ -91,6 +100,10 @@ class Tm():
         input_list = list(self.tape)
         input_list[self.position] = value
         self.tape = "".join(input_list)
+        
+        # Caso da escrita na "última" posição da fita com símbolo diferente de 'B'
+        if self.position == len(self.tape) - 1 and not self.tape[self.position] == 'B':
+            self.tape = "".join([self.tape, 'B'])
 
     def read_actual(self):
         """Método que retorna o símbolo da posição onde está a cabeça de leitura.
