@@ -21,35 +21,24 @@ class Reader():
             a máquina de Turing mais a entrada.
         """
 
-        with open(self.file) as file:
-            self.check_line(self.readline(file), FIRST_LINE)
-            Q = self.remove_blank(self.check_line(self.readline(file), Q_LINE))
-            E = self.remove_blank(self.check_line(self.readline(file), E_LINE))
-            r = self.remove_blank(self.check_line(self.readline(file), r_LINE))
-            self.check_line(self.readline(file), FIRST_S_LINE)
-            S = []
-            S_pattern = create_S_pattern(Q,r)
-            while(True):
-                S.append(self.check_line(self.readline(file), S_pattern))
-                # Se nao for a ultima transicao do arquivo
-                if not ',' in S[-1][-1]:
-                    break
-            self.check_line(self.readline(file), LAST_S_LINE)
-            q0 = self.check_line(self.readline(file), q0_LINE)
-            self.check_line(self.readline(file), LAST_LINE)
-            input = self.check_line(self.readline(file), create_input_pattern(r))
+        self.check_line(self.file.readline(), FIRST_LINE)
+        Q = self.remove_blank(self.check_line(self.file.readline(), Q_LINE))
+        E = self.remove_blank(self.check_line(self.file.readline(), E_LINE))
+        r = self.remove_blank(self.check_line(self.file.readline(), r_LINE))
+        self.check_line(self.file.readline(), FIRST_S_LINE)
+        S = []
+        S_pattern = create_S_pattern(Q,r)
+        while(True):
+            S.append(self.check_line(self.file.readline(), S_pattern))
+            # Se nao for a ultima transicao do arquivo
+            if not ',' in S[-1][-1]:
+                break
+        self.check_line(self.file.readline(), LAST_S_LINE)
+        q0 = self.check_line(self.file.readline(), q0_LINE)
+        self.check_line(self.file.readline(), LAST_LINE)
+        input = self.check_line(self.file.readline(), create_input_pattern(r))
             
         return Q, S, q0[0], input[0]
-
-    def readline(self, file):
-        """*'Sobrescrita'* do metodo de ler linhas para incrementar o contador e auxiliar na legibilidade da mensagem de erro.
-            
-        :param file: Objeto ``file`` do arquivo de entrada
-        :type file: file
-        """
-
-        self.line_counter += 1
-        return file.readline()
     
     def remove_blank(self, line):
         """Remove espaços em branco e gera uma lista com dos valores separados por vírgula.
@@ -77,4 +66,4 @@ class Reader():
             return match.groups()
         except Exception as error:
                 sys.exit('Erro encontrado: ' + str(error) + ".\n\nLinha " + str(self.line_counter) \
-                        + " do arquivo " + self.file)
+                        + " do arquivo ")
