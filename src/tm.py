@@ -77,7 +77,7 @@ class Tm():
 
     def move_left(self):
         """Método que move a cabeça de leitura para esquerda."""
-        self.clean_right()
+        #self.clean_right()
         try: 
             self.position -= 1
             if self.position == -1:

@@ -24,14 +24,14 @@ Para executar o módulo basta clonar o respositório::
 
 E executar o arquivo `main.py`, passando o arquivo de entrada como parâmetro::
 
-    python main.py <arquivo-de-entrada>
+    python main.py < <arquivo-de-entrada>
 
 Leitura e validação do arquivo de entrada
 -----------------------------------------
 
-O módulo ``reader`` é o responsável por ler, validar e sumarizar o conteúdo do arquivo de entrada fornecida como argumento na execução do programa.
+O módulo :mod:`reader` é o responsável por ler, validar e sumarizar o conteúdo do arquivo de entrada fornecida na execução do programa.
 
-Cada tipo de dado do arquivo de entrada é verificada utilizando padrões em regexp implementados no módulo ``patterns``.
+Cada tipo de dado do arquivo de entrada é verificada utilizando padrões em regexp implementados no módulo :mod:`patterns`.
 
 
 
