@@ -29,11 +29,13 @@ class Reader():
         S = []
         S_pattern = create_S_pattern(Q,r)
         while(True):
-            S.append(self.check_line(self.file.readline(), S_pattern))
+            line = self.file.readline()
             # Se nao for a ultima transicao do arquivo
-            if not ',' in S[-1][-1]:
+            if not line.find('}') == -1:
                 break
-        self.check_line(self.file.readline(), LAST_S_LINE)
+            else:
+                S.append(self.check_line(line, S_pattern))
+            
         q0 = self.check_line(self.file.readline(), q0_LINE)
         self.check_line(self.file.readline(), LAST_LINE)
         input = self.check_line(self.file.readline(), create_input_pattern(r))
@@ -58,7 +60,6 @@ class Reader():
         :param expected: Padrão regexp esperado para uma determinada linha do arquivo de entrada
         :type expected: str
         """
-
         try:
             match = regex.match(expected, line)
             if not match:
